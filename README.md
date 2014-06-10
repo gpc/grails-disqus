@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/gpc/grails-disqus.svg)](https://travis-ci.org/gpc/grails-disqus)
+
 # Grails Disqus plugin
 
 It provides embeding [DISQUS](http://disqus.com) commenting system into your Grails application.
