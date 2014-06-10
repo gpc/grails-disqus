@@ -1,10 +1,10 @@
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
+import grails.util.Holders
 
 class DisqusGrailsPlugin {
     // the plugin version
-    def version = "0.1"
+    def version = "0.2-SNAPSHOT"
     // the version or versions of Grails the plugin is designed for
-    def grailsVersion = "1.3.6 > *"
+    def grailsVersion = "2.0.0 > *"
     // the other plugins this plugin depends on
     def dependsOn = [:]
     // resources that are excluded from plugin packaging
@@ -12,20 +12,26 @@ class DisqusGrailsPlugin {
             "grails-app/views/error.gsp"
     ]
 
-    def author = "Edvinas Bartkus"
-    def authorEmail = "edvinas@geeks.lt"
-    def title = "Embed Disqus system into your application"
+    def author = "Grails Plugin Collective"
+    def authorEmail = "grails.plugin.collective@gmail.com"
+    def title = "Disqus Plugin"
+    def documentation = "http://grails.org/plugin/disqus"
     def description = '''\\
+Embed Disqus system into your application. 
 To simplify the usage of Disqus you can use this plugin. Simple add disqus tag into the pages
 where you want to allow users to comment stuff.
 '''
 
-    // URL to the plugin's documentation
-    def documentation = "http://grails.org/plugin/disqus"
 
-    def doWithWebDescriptor = { xml ->
-        // TODO Implement additions to web.xml (optional), this event occurs before 
-    }
+    def license = 'APACHE'
+    def organization = [name: 'Grails Plugin Collective', url: 'http://github.com/gpc']
+    def issueManagement = [system: 'Github Issues', url: 'https://github.com/gpc/grails-disqus/issues']
+    def scm = [url: 'https://github.com/gpc/grails-disqus']
+    def developers = [
+            [name: "Edvinas Bartkus", email: "edvinas@geeks.lt"],
+            [name: "Graeme Rocher", email: "grocher@gopivotal.com"]            
+    ]
+
 
     def doWithSpring = {
       GroovyClassLoader classLoader = new GroovyClassLoader(getClass().getClassLoader())
@@ -35,26 +41,8 @@ where you want to allow users to comment stuff.
       } catch(Exception e) {
         throw new RuntimeException("Couldn't load the disqus default settings.")
       }
-      ConfigObject config = ConfigurationHolder.config.grails.plugins.disqus
-      ConfigurationHolder.config.grails.plugins.disqus = defaultConfig.disqus.merge(config)
+      ConfigObject config = Holders.config.grails.plugins.disqus
+      Holders.config.grails.plugins.disqus = defaultConfig.disqus.merge(config)
     }
 
-    def doWithDynamicMethods = { ctx ->
-        // TODO Implement registering dynamic methods to classes (optional)
-    }
-
-    def doWithApplicationContext = { applicationContext ->
-        // TODO Implement post initialization spring config (optional)
-    }
-
-    def onChange = { event ->
-        // TODO Implement code that is executed when any artefact that this plugin is
-        // watching is modified and reloaded. The event contains: event.source,
-        // event.application, event.manager, event.ctx, and event.plugin.
-    }
-
-    def onConfigChange = { event ->
-        // TODO Implement code that is executed when the project configuration changes.
-        // The event is the same as for 'onChange'.
-    }
 }
