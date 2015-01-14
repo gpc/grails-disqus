@@ -1,11 +1,11 @@
 package org.geeks.plugins
 
-import org.codehaus.groovy.grails.commons.ConfigurationHolder as CH
-
 class DisqusTagLib {
   static namespace = "disqus"
+  def grailsApplication
+
   def comments = { attrs ->
-    def settings = CH.config.grails.plugins.disqus
+    def settings = grailsApplication.config.grails.plugins.disqus
     def shortname = attrs['shortname'] ? attrs['shortname'].toString() : settings.shortname
 
     if(!shortname) {
