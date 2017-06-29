@@ -6,3 +6,5 @@ target/
 .project
 
 *.iml
+build/*
+.gradle/*
