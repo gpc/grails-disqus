@@ -51,7 +51,7 @@ class DisqusTagLib {
 		}
 
 		String noscript = settings.noscript
-		String powered = settings.powered
+		boolean powered = settings.powered
 
 		out << render(template: "/templates/disqus/disqus", model: [shortname: shortname, identifier: identifier, url: url, title: title, category: category, noscript: noscript, powered: powered])
 	}
