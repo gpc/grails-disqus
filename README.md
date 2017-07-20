@@ -55,8 +55,5 @@ Identifier generation can by modified by creating identifier closure in Config.g
 Plugin can be disabled by setting enabled = false in config
 `grails.plugins.disqus.enabled = false`
 
-For more ideas, suggestions or bug reports:
-edvinas ( et ) geeks.lt
-
 
 
