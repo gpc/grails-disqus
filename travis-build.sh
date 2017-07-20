@@ -1,15 +1,17 @@
 #!/bin/bash
 set -e
 rm -rf *.zip
-./grailsw refresh-dependencies --non-interactive
-./grailsw test-app --non-interactive
-./grailsw package-plugin --non-interactive
-./grailsw doc --pdf --non-interactive
 
-filename=$(find . -name "grails-*.zip" | head -1)
-filename=$(basename $filename)
+./gradlew clean check assemble
+
+filename=$(find build/libs -name "*.jar" | head -1)
+filename=$(basename "$filename")
+
+EXIT_STATUS=0
 
 if [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_REPO_SLUG == "gpc/grails-disqus" && $TRAVIS_PULL_REQUEST == 'false' ]]; then
+  echo "Publishing archives"
+
   git config --global user.name "$GIT_NAME"
   git config --global user.email "$GIT_EMAIL"
   git config --global credential.helper "store --file=~/.git-credentials"
@@ -32,7 +34,8 @@ if [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_REPO_SLUG == "gpc/grails-disqus" && 
   # fi
 
 
-  ./grailsw publish-plugin --no-scm --allow-overwrite --non-interactive
+ ./gradlew bintrayUpload || EXIT_STATUS=$?
+
 else
   echo "Not on master branch, so not publishing"
   echo "TRAVIS_BRANCH: $TRAVIS_BRANCH"

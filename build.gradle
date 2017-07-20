@@ -8,7 +8,7 @@ buildscript {
     }
 }
 
-version "1.0-SNAPSHOT"
+version "1.0"
 group "org.grails.plugins"
 
 apply plugin:"idea"
@@ -38,9 +38,6 @@ dependencies {
 
     testCompile "org.grails:grails-plugin-testing"
 
-    //testCompile "org.grails.plugins:geb"
-    //testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
-    //testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 }
 
 bootRun {
@@ -49,15 +46,19 @@ bootRun {
 }
 // enable if you wish to package this plugin as a standalone application
 bootRepackage.enabled = false
+
 grailsPublish {
-    // TODO: Provide values here
-    user = 'user'
-    key = 'key'
-    githubSlug = 'foo/bar'
+    userOrg = "grails"
+
+    title = "Disqus Plugin"
+    desc  = "Disqus integration for grails"
+    developers = ["gpc": "Grails Plugin Collective", "snimavat": "Sudhir Nimavat"]
+
+    githubSlug = 'gpc/grails-disqus'
+    issueTrackerUrl = 'https://github.com/gpc/grails-disqus/issues'
+    vcsUrl = 'https://github.com/gpc/grails-disqus'
+
     license {
         name = 'Apache-2.0'
     }
-    title = "My Plugin"
-    desc = "Full plugin description"
-    developers = [johndoe:"John Doe"]
 }
